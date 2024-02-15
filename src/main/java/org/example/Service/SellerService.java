@@ -41,12 +41,8 @@ public class SellerService {
         return s;
     }
 
-    public Seller updateSeller(Seller old_s, Seller new_s){
-        sellerDAO.updateSeller(old_s, new_s);
-        return new_s;
-    }
-
     public void updateSellerName(Seller old_s, Seller new_s){
+        sellerDAO.updateSeller(old_s, new_s);
         for (int i = 0; i < sellerList.size(); i++){
             if (sellerList.get(i).equals(old_s)){
                 sellerList.set(i, new_s);

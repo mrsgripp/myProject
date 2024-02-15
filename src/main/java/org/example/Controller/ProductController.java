@@ -63,7 +63,6 @@ public class ProductController {
                     new_s.setSellerID(); //wondering if this will work
                     Product newProduct = productService.updateProduct(old_p, new_p);
                     productService.updateProductList(old_p, new_p);
-                    sellerService.updateSeller(old_s, new_s);
                     sellerService.updateSellerName(old_s, new_s);
                     newProduct.setProductID();
                     context.status(201);
@@ -78,7 +77,7 @@ public class ProductController {
             int productID = Integer.parseInt(context.pathParam("productID"));
             productService.deleteProduct(productID);
             context.result("Product Has Been Deleted");
-            context.status(201);
+            context.status(200);
         });
         api.get("product", context -> {
             List<Product> productList = productService.getProductList();

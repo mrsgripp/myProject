@@ -54,8 +54,8 @@ public class ProductService {
     }
 
     public void deleteProduct(int id){
+        Product product = productDAO.getProductById(id);
         productDAO.deleteProduct(id);
-        Product product = getProductById(id);
         for (int i = 0; i < productList.size(); i++){
             if (productList.get(i).equals(product)){
                 productList.remove(i);
