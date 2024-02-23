@@ -88,8 +88,7 @@ public class ProjectTests {
     @Test
     public void sellerAddedTest(){
         String name = "InsertSeller";
-        RegisteredSeller s = new RegisteredSeller();
-        s.Seller_Name = name;
+        RegisteredSeller s = new RegisteredSeller(name);
         try {
             registeredSellerService.insertRegisteredSeller(s);
             String actual = registeredSellerService.getRegisteredSellers().toString();

@@ -7,13 +7,17 @@ import java.util.Random;
 
 public class RegisteredSeller {
 
-    public long Seller_ID;
-    public String Seller_Name;
+    long Seller_ID;
+    String Seller_Name;
 
     public RegisteredSeller(){}
 
     public RegisteredSeller(long id, String name) {
         this.Seller_ID = id;
+        this.Seller_Name = name;
+    }
+
+    public RegisteredSeller(String name) {
         this.Seller_Name = name;
     }
 
