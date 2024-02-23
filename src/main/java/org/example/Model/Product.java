@@ -1,21 +1,28 @@
 package org.example.Model;
 
+import java.security.SecureRandom;
 import java.util.Objects;
 
 public class Product {
 
     public String name;
     public int price;
-    public String seller;
-    private int productID;
+    public long seller_ID;
+    public long productID;
 
     public Product(){}
 
-    public Product(int productID, String name, int price, String seller) {
+    public Product(long productID, String name, int price, long seller_ID) {
         this.name = name;
         this.price = price;
-        this.seller = seller;
+        this.seller_ID = seller_ID;
         this.productID = productID;
+    }
+
+    public Product(String name, int price, long seller_ID) {
+        this.name = name;
+        this.price = price;
+        this.seller_ID = seller_ID;
     }
 
     public String getName() {
@@ -34,34 +41,23 @@ public class Product {
         this.price = price;
     }
 
-    public String getSeller() {
-        return seller;
+    public long getSeller_ID() {
+        return seller_ID;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
+    public void setSeller_ID(long seller_ID) {
+
+        this.seller_ID = seller_ID;
     }
 
-    public int getProductID() {
+    public long getProductID() {
         return productID;
     }
 
     public void setProductID() {
 
-        this.productID = hashCode();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product)) return false;
-        Product product = (Product) o;
-        return price == product.price && Objects.equals(name, product.name) && Objects.equals(seller, product.seller);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, price, seller);
+        SecureRandom random = new SecureRandom();
+        this.productID = random.nextLong();
     }
 
     @Override
@@ -69,7 +65,7 @@ public class Product {
         return "Product{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", seller='" + seller + '\'' +
+                ", seller_ID='" + seller_ID + '\'' +
                 ", productID=" + productID +
                 '}';
     }
