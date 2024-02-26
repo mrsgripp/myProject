@@ -15,7 +15,7 @@ import java.sql.Connection;
 
 public class Main {
 
-    //public static Logger log = LoggerFactory.getLogger(Main.class);
+    public static Logger log = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
 
         Connection conn = ConnectionSingleton.getConnection();

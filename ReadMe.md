@@ -1,54 +1,52 @@
+Logging system is a work in progress. Logging is happening within the terminal but isn't being saved to a log file. 
+
 Phase 2
 
 HTTP & SQL project
 Two models / Tables:
 
-Product
-Product Id (must be unique)
+Product_Table
+Product Id (must be unique) (PK)
 Product Name
 Price
-Seller Name
+Seller ID (Foreign Key to Registered_Sellers Table)
 
-Seller
+Registered_Sellers
 Seller Name (must be unique)
+Seller ID (PK)
 
-Naturally, the two tables must be related via a foreign key.
-(Seller ID PK on seller table will be foreign key on Product table, instead of Seller Name)
 
-It is OK for the project to reset the database on every run of the API.
-If you would like your project to persist between runs, you can just comment out your .sql file's contents.
-You may use the ConnectionSingleton, tables.sql, and pomfile provided  in the h2-template repo to start up the SQL integration.
-On occassion, h2 files can get corrupted. If you suspect that this has happened, there is no harm in just deleting the 'h2' folder and allowing
-h2 to regenerate its files.
+Databases reset upon each run of the project, however, 
+the project feeds from a CSV file of pre-registered sellers that populate the Registered Seller table at the start of each run.
 
-Create/Read functionality on Seller
+Seller Functionality
 
-GET /seller/
+GET /registeredSellers
 - All sellers **
-POST /seller/
-- Seller names must be non-null & unique **
+POST /registeredSellers
+- Name requirements are
+- Unique from previously-existing sellers
+- a Seller_ID is assigned after a seller is created and the seller is returned to the user
 
 CRUD functionality on Product
 GET /product/
 - All products **
 GET /product/{id}
 - Get a single product **
-- We should get a 404 error when we try to access a non-existed product.**
+- A 404 is returned if the product_id does not exist
 POST /product/ - Add a single product
-- Product ids should be non-null and unique **
-- Product names should be non-null **
-- Price should be over 0, **
-- Seller name should refer to an actually existing seller **
+- Product name must be not-null or blank
+- Price must be over 0
+- Seller ID should refer to an actually existing seller
 
 - PUT /product/{id} - Update a single product **
-- Product names should be non-null
-- Price should be over 0
-- Seller name should refer to an actually existing seller
+- Product name must not be null or blank
+- Price must be over 0
+- Seller ID should refer to an actually existing seller
 - 
 DELETE /product/{id} - Delete a single product **
-- DELETE should always return 200, regardless of if the item existed
-at the start or not. This is convention.
+- Delete returns a 200 status whether the product exists or not. 
+- If product exists, message of a successful delete returns
+- If product does not exist, message of a non-existant product returns
 
 Unit testing of service classes
-- If you like, you can mock the DAO with mockito: https://www.tutorialspoint.com/mockito/index.htm
-Otherwise, just resetting the DB between every test will be fine. 

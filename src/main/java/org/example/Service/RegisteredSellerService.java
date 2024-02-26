@@ -25,10 +25,11 @@ public class RegisteredSellerService {
     public RegisteredSeller insertRegisteredSeller( RegisteredSeller s) throws SellerAlreadyExistsException {
         String name = s.getSeller_Name();
         if (registeredDAO.getSellerByName(name) == null){
-            //s.setSeller_ID();
             registeredDAO.insertRegisteredSeller(s);
+            Main.log.info("Added a new Registered Seller. Seller_ID: " + s.getSeller_Id());
             return s;
         } else {
+            Main.log.warn("Throwing new SellerAlreadyExistsException due to Seller: " + name + " already registered.");
             throw new SellerAlreadyExistsException("Seller " + s.getSeller_Name() + " already exists");
         }
     }
@@ -36,10 +37,11 @@ public class RegisteredSellerService {
     public RegisteredSeller getSellerByID(long ID) throws SellerNotFoundException {
         RegisteredSeller s = registeredDAO.getSellerByID(ID);
         if (s != null) {
+            Main.log.info("Retrieved Seller from database: " + s.toString());
             return s;
         }
         else {
-            //Main.log.warn("Throwing SellerNotFoundException due to invalid Seller ID");
+            Main.log.warn("Throwing SellerNotFoundException due to invalid Seller ID");
             throw new SellerNotFoundException("No registered sellers for ID " + ID );
         }
     }

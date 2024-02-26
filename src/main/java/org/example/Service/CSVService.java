@@ -32,7 +32,7 @@ public class CSVService {
                 String name = items[0];
                 RegisteredSeller s = new RegisteredSeller(id, name);
                 registeredService.insertRegisteredSeller(s);
-                //Main.log.info("Loaded Pre-Registered Sellers into Database");
+                Main.log.info("Loaded Pre-Registered Sellers into Database");
             }
         }catch(IOException | SellerAlreadyExistsException e){
             e.printStackTrace();
